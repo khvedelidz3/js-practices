@@ -9,7 +9,7 @@ function getDivisors (a) {
     }
 
     let dividers = [];
-    for (let i = 1; i <= 12; i++) {
+    for (let i = 1; i <= a; i++) {
         if (a % i == 0) {
             dividers.push(i);
         }
@@ -18,6 +18,6 @@ function getDivisors (a) {
     return dividers;
 }
 
-let result = getDivisors(12);
+let result = getDivisors(15);
 
 console.log(result);

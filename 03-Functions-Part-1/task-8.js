@@ -7,14 +7,17 @@ function f (arr) {
     if (arr.length === 0) {
         throw new Error('parameter can\'t be an empty');
     }
-    let i = arr.length;
-    function rec (i) {
-        if(arr[i] === 'undefined') return;
+
+    let i = 0;
+    let n = arr.length;
+    function rec () {
+        if(i === n) return;
         console.log(arr[i]);
-        i--;
-        rec(i);
+        i++;
+        rec();
     }
 
+    rec();
 }
 
 
