@@ -1,4 +1,4 @@
-var primeNumbers = [2];
+let primeNumbers = [2];
 
 for (let i = 3; i <= 10; i++) {
     let count = 0;

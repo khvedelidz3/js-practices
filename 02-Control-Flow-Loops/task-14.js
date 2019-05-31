@@ -1,4 +1,4 @@
-var arr = [1, 2, 5, 9, 4, 13, 4, 10];
+let arr = [1, 2, 5, 9, 4, 13, 4, 10];
 
 for (let item of arr) {
     if (item === 4) {
