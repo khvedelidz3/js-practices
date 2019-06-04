@@ -12,6 +12,10 @@ Object.defineProperties(person, {
         get() {
             let currentDay = new Date().getDate();
             return currentDay * this.rate;
+        },
+
+        set() {
+            throw new Error(`You can't set`);
         }
     }
 });
