@@ -9,8 +9,18 @@ Object.defineProperty(Object.prototype, 'mergeDeepRight', {
                     this[property]={}
                 };
                 this[property].mergeDeepRight(source[property]);
-            } else {
-                this[property] = source[property];
+            } else if(Array.isArray(source[property])){
+                this[property] = [];
+                source[property].forEach((item, index)=> {
+                    if(typeof item === 'object') {
+                        this[property].push({})
+                        this[property][this[property].length - 1].mergeDeepRight(item)
+                    }else {
+                        this[property].push(item)
+                    }
+                })
+            }else {
+                this[property] = source[property]
             }
         })
     }
@@ -28,18 +38,20 @@ const data = {
     }
 };
 
-data.mergeDeepRight({
+const source = {
     age: 40,
     contact: {
         email: 'baa@example.com',
         favorite: true,
         meta: {
-            tags: ['vip']
+            tags: ['vip', {name: 'test', test:{test2:'test2'}}, 'last one']
         }
     },
     test: {
         tes2: 'test text',
     }
-});
+};
 
-console.log(data)
+data.mergeDeepRight(source);
+
+console.log(data);
