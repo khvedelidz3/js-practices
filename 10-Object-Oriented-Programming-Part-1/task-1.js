@@ -1,7 +1,7 @@
 function CoffeeMachine(power) {
 	this.waterAmount = 0;
-    let WATER_HEAT_CAPACITY = 4200;
-    let timerId = null;
+    const WATER_HEAT_CAPACITY = 4200;
+    let timerId = void 0;
 	let self = this;
 	
     function getBoilTime() {
@@ -9,7 +9,8 @@ function CoffeeMachine(power) {
 	}
 	
     function onReady() {
-		console.log('Coffee is ready');
+        console.log('Coffee is ready');
+        ready = true;
 	}
 	
     this.run = function() {
@@ -18,11 +19,13 @@ function CoffeeMachine(power) {
     
     this.stop = function() {
         clearTimeout(timerId);
+        timerId = void 0;
         console.log(`coffee isn't ready`)
     }
 }
 
 var coffeeMachine = new CoffeeMachine(50000);
+coffeeMachine.stop();
 coffeeMachine.waterAmount = 200;
 coffeeMachine.run();
 coffeeMachine.stop(); // coffee isn't ready
