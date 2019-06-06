@@ -2,7 +2,7 @@ function CoffeeMachine(power, capacity) {
     let waterAmount = 0;
     let WATER_HEAT_CAPACITY = capacity;
     const _power = power;
-    let timerId = null;
+    let timerId = void 0;
     let status = false;
     let self = this;
 
@@ -34,7 +34,6 @@ function CoffeeMachine(power, capacity) {
 
     function onReady() {
         console.log('Coffee is ready');
-        status = false;
     }
 
     this.setOnReady = function (func) {
@@ -42,8 +41,12 @@ function CoffeeMachine(power, capacity) {
     }
 
     this.run = function () {
-        timerId = setTimeout(onReady, getBoilTime());
         status = true;
+
+        timerId = setTimeout(() => {
+            onReady();
+            status = false;
+        }, getBoilTime());
     };
 
     this.isRunning = function () {
@@ -51,9 +54,12 @@ function CoffeeMachine(power, capacity) {
     }
 
     this.stop = function () {
-        clearTimeout(timerId);
-        status = false;
-        console.log(`coffee isn't ready`)
+        if (typeof timerId !== 'undefined') {
+            clearTimeout(timerId);
+            timerId = void 0;
+            status = false;
+            console.log(`coffee isn't ready`)
+        }
     }
 }
 
@@ -62,12 +68,10 @@ coffeeMachine.setWaterAmount(100);
 
 console.log('Before: ' + coffeeMachine.isRunning()); // Before: false
 
-// coffeeMachine.run();
+coffeeMachine.run();
 
 console.log('In progress: ' + coffeeMachine.isRunning()); // In progress: true
 
 coffeeMachine.setOnReady(function() {
 	console.log('After: ' + coffeeMachine.isRunning()); // After: false
 });
-
-coffeeMachine.run();
