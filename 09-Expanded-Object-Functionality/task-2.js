@@ -9,19 +9,8 @@ Object.defineProperty(Object.prototype, 'mergeDeepRight', {
                     this[property] = {}
                 };
                 this[property].mergeDeepRight(source[property]);
-            } else if (Array.isArray(source[property])) {
-                this[property] = [];
-                source[property].forEach((item) => {
-                    if (typeof item === 'object' && !Array.isArray(item)) {
-                        this[property].push({})
-                        this[property][this[property].length - 1].mergeDeepRight(item)
-                    } else if (Array.isArray(item)) {
-                        this[property].push([]);
-                        this[property][this[property].length - 1].mergeDeepRight(item);
-                    } else {
-                        this[property].push(item)
-                    }
-                })
+            } else if (Array.isArray(source[property])) {        
+                this[property]=this[property].concat(source[property]);
             } else {
                 this[property] = source[property]
             }
@@ -47,7 +36,7 @@ const source = {
         email: 'baa@example.com',
         favorite: false,
         meta: {
-            tags: ['vip', { name: 'test', test: { test2: 'test2' } }, ['last one', {name: 'more deep'}, ['much more deeper']], ['top level']]
+            tags: ['vip', { name: 'test', test: { test2: 'test2' } }, ['last one', { name: 'more deep' }, ['much more deeper']], ['top level']]
         }
     },
     test: {
@@ -58,3 +47,4 @@ const source = {
 data.mergeDeepRight(source);
 
 console.log(data);
+console.log(data.contact.meta.tags);
