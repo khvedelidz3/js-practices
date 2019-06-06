@@ -5,21 +5,24 @@ Object.defineProperty(Object.prototype, 'mergeDeepRight', {
 
         properties.forEach((property) => {
             if (typeof source[property] === 'object' && !Array.isArray(source[property])) {
-                if(!this.hasOwnProperty(property)){
-                    this[property]={}
+                if (!this.hasOwnProperty(property)) {
+                    this[property] = {}
                 };
                 this[property].mergeDeepRight(source[property]);
-            } else if(Array.isArray(source[property])){
+            } else if (Array.isArray(source[property])) {
                 this[property] = [];
-                source[property].forEach((item, index)=> {
-                    if(typeof item === 'object') {
+                source[property].forEach((item) => {
+                    if (typeof item === 'object' && !Array.isArray(item)) {
                         this[property].push({})
                         this[property][this[property].length - 1].mergeDeepRight(item)
-                    }else {
+                    } else if (Array.isArray(item)) {
+                        this[property].push([]);
+                        this[property][this[property].length - 1].mergeDeepRight(item);
+                    } else {
                         this[property].push(item)
                     }
                 })
-            }else {
+            } else {
                 this[property] = source[property]
             }
         })
@@ -42,9 +45,9 @@ const source = {
     age: 40,
     contact: {
         email: 'baa@example.com',
-        favorite: true,
+        favorite: false,
         meta: {
-            tags: ['vip', {name: 'test', test:{test2:'test2'}}, 'last one']
+            tags: ['vip', { name: 'test', test: { test2: 'test2' } }, ['last one', {name: 'more deep'}, ['much more deeper']], ['top level']]
         }
     },
     test: {
