@@ -1,21 +1,10 @@
 function Hamster() {
-    Hamster.prototype._food = [];
-
-    Hamster.prototype._found = function(something) {
-        this.food.push(something);
-    };
-
-    return {
-        food: this._food,
-        found: this._found
-    }
+    this.food = [];
 }
 
-// Hamster.prototype.food = []; // empty "stomach"
-
-// Hamster.prototype.found = function(something) {
-//     this.food.push(something);
-// };
+Hamster.prototype.found = function(something) {
+    this.food.push(something);
+};
 
 // Create two hamsters and feed the first
 let speedy = new Hamster();
