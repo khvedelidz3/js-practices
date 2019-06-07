@@ -41,8 +41,8 @@ function CoffeeMachine(power, capacity) {
 
     this.run = function () {
         timerId = setTimeout(() => {
-            onReady();
             timerId = null;
+            onReady();
         }, getBoilTime());
     };
 
