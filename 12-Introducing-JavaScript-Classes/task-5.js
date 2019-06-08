@@ -7,12 +7,10 @@ class Validator {
         let last = str.length - 1;
         if (str.includes('@') && str.includes('.')) {
             if (str.indexOf('@') !== 0 &&
-                str.indexOf('@') !==
-                last &&
+                str.indexOf('@') !== last &&
                 str.indexOf('.') !== 0 &&
-                str.indexOf('.') !==
-                last &&
-                str.indexOf('@') < str.indexOf('.')) {
+                str.indexOf('.') !== last &&
+                str.indexOf('@') < str.lastIndexOf('.')) {
                 return true;
             }
         }
@@ -31,23 +29,48 @@ class Validator {
     isDate(str) {
         let arr = str.split('.');
 
-        if (arr.length === 3 && +arr[1] < 13 && +arr[1] > 0 && +arr[2] > 1945 && +arr[2] <= new Date().getFullYear() && +arr[0] > 0 && +arr[0] < 32) {
-            if (arr[0] <= new Date(arr[2], arr[1], 0).getDate()) {
-                return true;
-            }
+        if (arr.length === 3 &&
+            +arr[1] < 13 && +arr[1] > 0 &&
+            +arr[2] > 1945 &&
+            +arr[2] <= new Date().getFullYear() &&
+            +arr[0] > 0 &&
+            +arr[0] < 32 &&
+            +arr[0] <= new Date(arr[2], arr[1], 0).getDate()) {
+            return true;
         }
 
         return false
     }
 
     isPhone(str) {
-        let myStr = str
-        let replace = ['+', '(', ')', '-', ' ']
-        for(let char of replace) {
-            myStr = myStr.replace(char, '');
+        let myStr = str;
+        let chars = ['+', '(', ')', '-', ' '];
+        if (!str.includes('(+995)') ||
+            !str.includes('-') ||
+            str.indexOf('(') !== 0 ||
+            str.indexOf('+') !== 1 ||
+            str.indexOf(')') !== 5 ||
+            str.indexOf(' ') !== 6
+        ){
+            return false;
+        } else {
+            for (let i in str) {
+                if (str[+i] === '-' && +i !== 10 && +i !== 13 && +i !== 16) {
+                    return false;
+                }
+            }
         }
-        console.log(myStr)
-        let number = str.replace()
+        for (let char of chars) {
+            myStr = myStr.split(char).join('');
+        }
+
+        for(let char of myStr) {
+            if(! (char >= '0' && char <= '9')) {
+                return false
+            }
+        }
+
+        return true;
     }
 }
 
