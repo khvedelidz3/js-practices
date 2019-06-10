@@ -4,7 +4,14 @@ class MyString {
     }
 
     reverse(str) {
-        return str.split('').reverse().join('');
+        let n = str.length-1;
+        let newStr = '';
+        // return str.split('').reverse().join('');
+        for(let i = n; i >= 0; i--) {
+            newStr += str[i];
+        }
+
+        return newStr;
     }
 
     ucFirst(str) {
