@@ -1,12 +1,8 @@
 class MyString {
-    constructor() {
-
-    }
-
     reverse(str) {
         let n = str.length-1;
         let newStr = '';
-        // return str.split('').reverse().join('');
+
         for(let i = n; i >= 0; i--) {
             newStr += str[i];
         }
@@ -21,7 +17,7 @@ class MyString {
     ucWords(str) {
         let arr = str.split(' ');
         arr = arr.map((item) => {
-            return item.charAt(0).toUpperCase() + item.slice(1);
+            return this.ucFirst(item);
         })
         return arr.join(' ');
     }

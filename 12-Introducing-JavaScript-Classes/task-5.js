@@ -1,8 +1,4 @@
 class Validator {
-    constructor() {
-
-    }
-
     isEmail(str) {
         let last = str.length - 1;
         if (str.includes('@') && str.includes('.')) {
@@ -19,7 +15,15 @@ class Validator {
     }
 
     isDomain(str) {
-        if (str.includes('.') && str.indexOf('.') !== 0 && str.indexOf('.') !== str.length - 1) {
+        let domain = str.toLowerCase();
+        let ending = str.substring(str.lastIndexOf('.'));
+
+        if (domain.includes('.') &&
+        domain.indexOf('.') !== 0 &&
+        domain.indexOf('.') !== domain.length - 1 &&
+        domain.substring(0, 4) === 'www.' &&
+        (ending === '.ru' || ending === '.com' || ending === '.org' || ending === '.net')
+        ) {
             return true;
         }
 
@@ -77,6 +81,6 @@ class Validator {
 let validator = new Validator();
 
 console.log(validator.isEmail('jshtml@mail.ru'));
-console.log(validator.isDomain('jshtml.net'));
+console.log(validator.isDomain('www.jshtml.com'));
 console.log(validator.isDate('12.05.2019'));
 console.log(validator.isPhone('(+995) 551-43-43-43')); // it can be format of your country
