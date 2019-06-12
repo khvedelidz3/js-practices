@@ -57,6 +57,8 @@ class DB {
         }
 
         this.records.set(id, Object.assign(this.records.get(id), val))
+
+        return id;
     }
 
     delete(id) {
@@ -147,18 +149,31 @@ const person = {
     country: 'ge', // required field with type string
     salary: 500 // required field with type number
 };
+const person2 = {
+    name: 'Pitter', // required field with type string
+    age: 21, // required field with type number
+    country: 'ge', // required field with type string
+    salary: 500 // required field with type number
+};
+const person3 = {
+    name: 'Pitter', // required field with type string
+    age: 21, // required field with type number
+    country: 'ge', // required field with type string
+    salary: 500 // required field with type number
+};
 
 const id = db.create(person);
-const a = db.create(person);
-const b = db.create(person);
-const c = db.create(person);
+const a = db.create(person2);
+const b = db.create(person3);
 
 const customer = db.read(id);
 const customers = db.readAll(); // array of users
 db.update(id, {age: 22}); // id
 db.delete(id); // true
+const newCustomers = db.readAll();
 console.log(db.records.keys())
 console.log(customer);
 console.log(customers);
-console.log(id, a, b, c)
+console.log(newCustomers);
+
 
