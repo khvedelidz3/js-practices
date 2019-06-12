@@ -68,9 +68,7 @@ class DB {
             throw new DeleteError('Prameter is required and should be existing id with type of string or number');
         }
 
-        this.records.delete(id);
-
-        return true;
+        return this.records.delete(id);
     }
 
     find(query) {
