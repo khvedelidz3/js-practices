@@ -76,12 +76,11 @@ class DB {
             throw new FindError('Invalid query');
         }
 
-        let properties = Object.getOwnPropertyNames(query);
         let result = [];
         let allRecords = this.readAll();
         allRecords.forEach(record => {
-            // console.log(record)
             let matched = true;
+
             if (query.hasOwnProperty('name') && query['name'] !== record['name']) matched = false;
             if (query.hasOwnProperty('country') && query['country'] !== record['country']) matched = false;
             if (query.hasOwnProperty('age') && query['age'].hasOwnProperty('min') && query['age'].hasOwnProperty('max') && record['age'] < query['age'].min && record['age'] > query['age'].max) {
@@ -102,7 +101,7 @@ class DB {
             if (matched) {
                 result.push(record);
             }
-        })
+        });
 
         return result;
     }
@@ -186,7 +185,7 @@ class DB {
                     } else {
                         return property === 'name' || property === 'country';
                     }
-                })
+                });
 
                 return status;
             }
