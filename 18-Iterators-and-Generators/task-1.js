@@ -1,8 +1,6 @@
 class Customers {
     constructor() {
         this.customers = [];
-        // this.i = 0;
-        // const self = this;
     }
 
     [Symbol.iterator]() {
@@ -23,9 +21,10 @@ class Customers {
         }
     }
 
-
-
     add(item) {
+        if (typeof item !== 'object' || !item.hasOwnProperty('name')) {
+            throw new Error('Ivalid parameter')
+        }
         this.customers.push(item);
     }
 }

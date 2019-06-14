@@ -1,22 +1,21 @@
 class Customers {
     constructor() {
         this.customers = [];
-        // this.i = 0;
-        // const self = this;
     }
 
     *[Symbol.iterator]() {
         let customers = this.customers.filter(item => {
             return item.verified;
         });
-       for(let customer of customers) {
-           yield customer;
-       }
+        for (let customer of customers) {
+            yield customer;
+        }
     }
 
-
-
     add(item) {
+        if (typeof item !== 'object' || !item.hasOwnProperty('name')) {
+            throw new Error('Ivalid parameter')
+        }
         this.customers.push(item);
     }
 }
