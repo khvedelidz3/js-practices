@@ -1,5 +1,5 @@
 function isCustomerVerified(obj) {
-    if(obj.hasOwnProperty('verified') && obj.verified === true) {
+    if(obj.hasOwnProperty('verified') && obj.verified) {
         return Promise.resolve(true);
     }
 

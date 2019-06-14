@@ -1,7 +1,9 @@
 function send(url) {
     return new Promise((resolve, reject) => {
         get(url, (error, meta, body) => {
-            if(meta.status === 200) {
+            if(error !== null) {
+                reject(`Invalid URL: ${url}`)
+            }else if(meta.status === 200) {
                 const { data } = JSON.parse(body);
                 resolve(data);
             } else {

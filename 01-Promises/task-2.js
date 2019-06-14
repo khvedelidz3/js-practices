@@ -5,15 +5,18 @@ function getCustomers(customers, countries) {
         }
     }
 
+    let result = [];
+
     customers.forEach(customer => {
         countries.forEach(country => {
-            if (customer.id === country.id && customer.hasOwnProperty('verified') && customer.verified === true) {
+            if (customer.id === country.id && customer.hasOwnProperty('verified') && customer.verified) {
                 Object.assign(customer, country);
+                result.push(customer);
             }
         })
     })
 
-    return Promise.resolve(customers);
+    return Promise.resolve(result);
 }
 
 const customers = [
