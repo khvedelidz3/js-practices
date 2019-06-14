@@ -13,7 +13,7 @@ class Customers {
     }
 
     add(item) {
-        if (typeof item !== 'object' || !item.hasOwnProperty('name')) {
+        if (typeof item !== 'object' || !item.hasOwnProperty('name') || typeof item.name !== 'string') {
             throw new Error('Ivalid parameter')
         }
         this.customers.push(item);
