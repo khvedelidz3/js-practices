@@ -8,6 +8,9 @@ class Countries {
     }
 
     send(size) {
+        if(typeof size !== 'number') {
+            throw new Error ('Size parameter should be number');
+        }
         return new Promise((resolve, reject) => {
             get(this.url+'?size='+size, (error, meta, body) => {
                 if (meta.status === 200) {
